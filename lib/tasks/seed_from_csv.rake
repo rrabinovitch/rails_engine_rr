@@ -3,12 +3,12 @@ require 'csv'
 namespace :seed_from_csv do
   desc "delete data and reset primary key sequence"
   task destroy: :environment do
-    Customer.destroy_all
-    InvoiceItem.destroy_all
-    Invoice.destroy_all
-    Item.destroy_all
-    Merchant.destroy_all
     Transaction.destroy_all
+    InvoiceItem.destroy_all
+    Item.destroy_all
+    Invoice.destroy_all
+    Merchant.destroy_all
+    Customer.destroy_all
 
     ActiveRecord::Base.connection.tables.each do |t|
       ActiveRecord::Base.connection.reset_pk_sequence!(t)
@@ -80,8 +80,8 @@ namespace :seed_from_csv do
       Transaction.create(row.to_h)
     end
 
-    puts "Seeded #{Customer.all.count} transactions."
+    puts "Seeded #{Transaction.all.count} transactions."
   end
 
-  task :all => [:destroy, :customers, :invoice_items, :invoices, :items, :merchants, :transactions]
+  task :all => [:destroy, :customers, :merchants, :items, :invoices, :invoice_items, :transactions]
 end
