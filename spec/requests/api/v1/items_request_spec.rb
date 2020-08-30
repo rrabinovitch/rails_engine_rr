@@ -16,6 +16,8 @@ describe 'Items endpoints' do
 
     get "/api/v1/items/#{id}"
     expect(response).to be_successful
+
+    item = JSON.parse(response.body)
     expect(item["id"]).to eq(id)
   end
 end
