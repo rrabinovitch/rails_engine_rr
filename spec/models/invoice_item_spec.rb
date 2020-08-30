@@ -11,7 +11,7 @@ RSpec.describe InvoiceItem, type: :model do
   describe 'relationships' do
     it { should belong_to :item }
     it { should belong_to :invoice }
-    it { should belong_to :customer }
-    it { should have_many :transactions }
+    # relationship to transactions ??it { should have_many(:transactions).through.. }
+    # relationship to customer ?? it { should belong_to(:customer).through ?? }
   end
 end
