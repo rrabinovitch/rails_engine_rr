@@ -4,6 +4,5 @@ FactoryBot.define do
   description { "This is a *~very fancy~* item." }
     unit_price { 5.5 }
     merchant
-    # association :merchant, factory: :merchant
   end
 end
