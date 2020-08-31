@@ -20,4 +20,14 @@ describe 'Items endpoints' do
     item = JSON.parse(response.body)
     expect(item["id"]).to eq(id)
   end
+
+  it 'Items#create' do
+    item_params = { name: "Cheap item", description: "This is just a cheap item." }
+
+    post "/api/v1/items", params: { item: item_params } ### THIS SHOULD MAYBE BE BODY INSTEAD OF PARAMS??
+    expect(response).to be_successful
+
+    item = Item.last
+    expect(item.name).to eq(item_params[:name])
+  end
 end
