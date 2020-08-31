@@ -22,9 +22,11 @@ describe 'Items endpoints' do
   end
 
   it 'Items#create' do
-    item_params = { name: "Cheap item", description: "This is just a cheap item." }
+    merchant = create(:merchant)
+    item_params = { name: "Cheap item", description: "This is just a cheap item.", unit_price: 2.75, merchant_id: merchant.id }
+    headers = { "CONTENT_TYPE" => "application/json" }
+    post "/api/v1/items", params: JSON.generate({item: item_params}), headers: headers
 
-    post "/api/v1/items", params: { item: item_params } ### THIS SHOULD MAYBE BE BODY INSTEAD OF PARAMS??
     expect(response).to be_successful
 
     item = Item.last
