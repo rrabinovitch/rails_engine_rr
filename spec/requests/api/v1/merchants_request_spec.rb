@@ -77,7 +77,7 @@ RSpec.describe 'Merchants endpoints' do
 
     expect(Merchant.count).to eq(1)
 
-    expect{ delete "/api/v1/items/#{merchant.id}" }.to change(Merchant, :count).by(-1)
+    expect{ delete "/api/v1/merchants/#{merchant.id}" }.to change(Merchant, :count).by(-1)
     expect(response).to be_successful
     expect(response.content_type).to eq("application/json")
 
