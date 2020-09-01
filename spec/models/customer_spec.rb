@@ -8,6 +8,5 @@ RSpec.describe Customer, type: :model do
 
   describe 'relationships' do
     it { should have_many :invoices }
-    # relationship with invoice_items ??
   end
 end
