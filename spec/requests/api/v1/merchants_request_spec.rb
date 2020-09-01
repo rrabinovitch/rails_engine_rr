@@ -37,7 +37,7 @@ RSpec.describe 'Merchants endpoints' do
     merchant_params = { name: "Fun Store" }
     headers = { "CONTENT_TYPE" => "application/json" }
 
-    post "/api/v1/merchants", params: JSON.generate({item: merchant_params}), headers: headers
+    post "/api/v1/merchants", params: JSON.generate({merchant: merchant_params}), headers: headers
     expect(response).to be_successful
     expect(response.content_type).to eq("application/json")
 
