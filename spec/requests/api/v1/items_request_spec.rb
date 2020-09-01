@@ -39,7 +39,7 @@ describe 'Items endpoints' do
     item_params = { name: "New Item Name" }
     headers = { "CONTENT_TYPE" => "application/json" }
 
-    put "/api/v1/items", params: JSON.generate({item: item_params}), headers: headers
+    put "/api/v1/items/#{item_id}", params: JSON.generate({item: item_params}), headers: headers
     expect(response).to be_successful
 
     item = Item.find_by(id: item_id)
