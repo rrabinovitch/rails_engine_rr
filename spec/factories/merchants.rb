@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :merchant do
-    name { "MyString" }
+    name { "Bed Bath & Beyond" }
   end
 end
