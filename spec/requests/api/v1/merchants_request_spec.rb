@@ -52,10 +52,30 @@ RSpec.describe 'Merchants endpoints' do
   end
 
   it 'Merchants#update' do
+    merchant_id = create(:merchant).id
+    previous_name = Merchant.last.name
+    update_merchant_params = { name: "New Merchant Name" }
+    headers = { "CONTENT_TYPE" => "application/json" }
 
+    put "/api/v1/merchants/#{merchant_id}", params: JSON.generate({merchant: update_merchant_params}), headers: headers
+    expect(response).to be_successful
+    expect(response.content_type).to eq("application/json")
+
+    merchant = Merchant.find_by(id: merchant_id)
+
+    expect(merchant.name).to_not eq(previous_name)
+    expect(merchant.name).to eq(update_merchant_params[:name])
+
+    json_response = JSON.parse(response.body, symbolize_names: true)
+    expect(json_response[:data][:id]).to eq(merchant_id.to_s)
+    expect(json_response[:data][:type]).to eq("merchant")
+    expect(json_response[:data][:attributes][:name]).to eq(update_merchant_params[:name])
   end
 
   it 'Merchants#destroy' do
 
   end
+
+
+  
 end
