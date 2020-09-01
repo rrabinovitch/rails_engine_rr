@@ -8,8 +8,11 @@ describe 'Items endpoints' do
     expect(response).to be_successful
     expect(response.content_type).to eq("application/json")
 
-    items = JSON.parse(response.body)
-    expect(items.count).to eq(3)
+    items = JSON.parse(response.body, symbolize_names: true)
+    expect(items[:data].count).to eq(3)
+    expect(items[:data].first).to have_key(:id)
+    expect(items[:data].first).to have_key(:type)
+    expect(items[:data].first).to have_key(:attributes)
   end
 
   it 'Items#show' do
