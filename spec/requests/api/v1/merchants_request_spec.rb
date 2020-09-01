@@ -15,10 +15,23 @@ RSpec.describe 'Merchants endpoints' do
     expect(merchants_json[:data].first).to have_key(:attributes)
     expect(merchants_json[:data].first[:attributes]).to have_key(:name)
     expect(merchants_json[:data].first).to have_key(:relationships)
+    binding.pry
   end
 
   it 'Merchants#show' do
+    id = create(:merchant).id
 
+    get "/api/v1/merchants/#{id}"
+    expect(response).to be_successful
+    expect(response.content_type).to eq("application/json")
+
+    merchant_json = JSON.parse(response.body, symbolize_names: true)
+    expect(merchant_json[:data][:id]).to eq(id.to_s)
+    expect(merchant_json[:data]).to have_key(:id)
+    expect(merchant_json[:data][:type]).to eq("merchant")
+    expect(merchant_json[:data]).to have_key(:attributes)
+    expect(merchant_json[:data][:attributes]).to have_key(:name)
+    expect(merchant_json[:data]).to have_key(:relationships)
   end
 
   it 'Merchants#create' do
