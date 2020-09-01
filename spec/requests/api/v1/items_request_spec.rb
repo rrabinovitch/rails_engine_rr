@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'Items endpoints' do
+RSpec.describe 'Items endpoints' do
   it 'Items#index' do
     create_list(:item, 3)
 
