@@ -13,6 +13,7 @@ RSpec.describe 'Merchant Items endpoint' do
     merchant_items_json = JSON.parse(response.body, symbolize_names: true)
     expect(merchant_items_json[:data].count).to eq(3)
     expect(merchant_items_json[:data].first).to have_key(:id)
-    # expect(merchant_items_json[:data]) to not have item w id of last item
+
+    expect(merchant_items_json[:data].none? { |item| item[:id] == diff_merchant_item.id }).to eq(true)
   end
 end
