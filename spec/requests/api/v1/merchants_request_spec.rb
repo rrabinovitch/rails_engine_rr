@@ -73,9 +73,14 @@ RSpec.describe 'Merchants endpoints' do
   end
 
   it 'Merchants#destroy' do
+    merchant = create(:merchant)
 
+    expect(Merchant.count).to eq(1)
+
+    expect{ delete "/api/v1/items/#{merchant.id}" }.to change(Merchant, :count).by(-1)
+    expect(response).to be_successful
+    expect(response.content_type).to eq("application/json")
+
+    expect{Merchant.find(merchant.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
-
-
-  
 end
