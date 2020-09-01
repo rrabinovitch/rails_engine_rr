@@ -89,6 +89,5 @@ describe 'Items endpoints' do
     expect(response.content_type).to eq("application/json")
 
     expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
-    binding.pry
   end
 end
