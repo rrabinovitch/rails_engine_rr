@@ -67,7 +67,17 @@ RSpec.describe 'Items search endpoints' do
     end
 
     it 'Can find a single item by price' do
+      get "/api/v1/items/find?unit_price=#{@found_item_1.unit_price}"
+      expect(response).to be_successful
+      expect(response.content_type).to eq("application/json")
 
+      search_results_json = JSON.parse(response.body, symbolize_names: true)
+      expect(search_results_json[:data][:id]).to eq(@found_item_1.id.to_s)
+      expect(search_results_json[:data][:type]).to eq("item")
+      expect(search_results_json[:data][:attributes][:name]).to eq(@found_item_1.name)
+      expect(search_results_json[:data][:attributes][:description]).to eq(@found_item_1.description)
+      expect(search_results_json[:data][:attributes][:unit_price]).to eq(@found_item_1.unit_price)
+      expect(search_results_json[:data][:attributes][:merchant_id]).to eq(@found_item_1.merchant_id)
     end
 
     it 'Can find a single item by the date it was created' do

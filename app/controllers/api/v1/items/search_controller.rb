@@ -3,8 +3,8 @@ class Api::V1::Items::SearchController < ApplicationController
     attribute = request.query_parameters.keys.first
     search_value = request.query_parameters.values.first
     # if there's more than one query param or if the first attribute is not one of our model attributes, send an error
-    if params[:id]
-      item = Item.find(params[:id])
+    if params[:id] || params[:unit_price]
+      item = Item.find_by("#{attribute}": search_value)
     else
       item = Item.where("#{attribute} ILIKE '%#{search_value}%'").first
     end
