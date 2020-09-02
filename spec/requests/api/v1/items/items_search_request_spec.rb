@@ -4,7 +4,7 @@ RSpec.describe 'Items search endpoints' do
   before :each do
     create_list(:item, 4, created_at: "2012-03-27 14:53:59", updated_at: "2012-04-15 14:00:05")
     @found_item = Item.first
-    @not_found_item = create(:item, name: "Don't Find Me", description: "I shouldn't be found.")
+    @not_found_item = create(:item, name: "Don't Find Me", description: "I shouldn't be found.", unit_price: 10)
   end
 
   describe 'Single finders' do
@@ -161,6 +161,22 @@ RSpec.describe 'Items search endpoints' do
       expect(search_results_json[:data].first[:attributes]).to have_key(:unit_price)
       expect(search_results_json[:data].first[:attributes]).to have_key(:merchant_id)
       # add expectation to not have not_found_item
+    end
+
+    it 'Can find mulitple items by price' do
+      get "/api/v1/items/find_all?unit_price=#{@found_item.unit_price}"
+      expect(response).to be_successful
+      expect(response.content_type).to eq("application/json")
+
+      search_results_json = JSON.parse(response.body, symbolize_names: true)
+      expect(search_results_json[:data].count).to eq(4)
+      expect(search_results_json[:data].first).to have_key(:id)
+      expect(search_results_json[:data].first[:type]).to eq("item")
+      expect(search_results_json[:data].first).to have_key(:attributes)
+      expect(search_results_json[:data].first[:attributes]).to have_key(:name)
+      expect(search_results_json[:data].first[:attributes]).to have_key(:description)
+      expect(search_results_json[:data].first[:attributes]).to have_key(:unit_price)
+      expect(search_results_json[:data].first[:attributes]).to have_key(:merchant_id)
     end
   end
 end
