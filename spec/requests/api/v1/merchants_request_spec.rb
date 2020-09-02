@@ -79,7 +79,8 @@ RSpec.describe 'Merchants endpoints' do
 
     expect{ delete "/api/v1/merchants/#{merchant.id}" }.to change(Merchant, :count).by(-1)
     expect(response).to be_successful
-    expect(response.content_type).to eq("application/json")
+    expect(response.body).to be_empty
+    expect(response.status).to eq(204)
 
     expect{Merchant.find(merchant.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
