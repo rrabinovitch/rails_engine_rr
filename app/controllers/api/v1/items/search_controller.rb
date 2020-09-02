@@ -6,7 +6,7 @@ class Api::V1::Items::SearchController < ApplicationController
     if params[:id]
       item = Item.find(params[:id])
     else
-        item = Item.where("#{attribute} ILIKE '%#{search_value}%'").first
+      item = Item.where("#{attribute} ILIKE '%#{search_value}%'").first
     end
     render json: ItemSerializer.new(item)
   end
