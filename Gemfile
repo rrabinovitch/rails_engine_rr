@@ -52,3 +52,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'figaro'
 gem 'activerecord-reset-pk-sequence'
 gem 'fast_jsonapi'
+gem 'table_print'
