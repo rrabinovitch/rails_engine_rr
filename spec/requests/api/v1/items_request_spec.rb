@@ -17,7 +17,6 @@ RSpec.describe 'Items endpoints' do
     expect(items_json[:data].first[:attributes]).to have_key(:description)
     expect(items_json[:data].first[:attributes]).to have_key(:unit_price)
     expect(items_json[:data].first[:attributes]).to have_key(:merchant_id)
-    # expect(items_json[:data].first).to have_key(:relationships)
   end
 
   it 'Items#show' do
@@ -36,7 +35,6 @@ RSpec.describe 'Items endpoints' do
     expect(item_json[:data][:attributes]).to have_key(:description)
     expect(item_json[:data][:attributes]).to have_key(:unit_price)
     expect(item_json[:data][:attributes]).to have_key(:merchant_id)
-    # expect(item_json[:data]).to have_key(:relationships)
   end
 
   it 'Items#create' do
@@ -44,8 +42,7 @@ RSpec.describe 'Items endpoints' do
     item_params = { name: "Cheap item", description: "This is just a cheap item.", unit_price: 2.75, merchant_id: merchant.id }
     headers = { "CONTENT_TYPE" => "application/json" }
 
-    post "/api/v1/items", params: item_params#, headers: headers
-    # post "/api/v1/items", params: JSON.generate({item: item_params}), headers: headers
+    post "/api/v1/items", params: JSON.generate(item_params), headers: headers
     expect(response).to be_successful
     expect(response.content_type).to eq("application/json")
 
@@ -59,8 +56,6 @@ RSpec.describe 'Items endpoints' do
     expect(json_response[:data][:attributes][:description]).to eq(item_params[:description])
     expect(json_response[:data][:attributes][:unit_price]).to eq(item_params[:unit_price])
     expect(json_response[:data][:attributes][:merchant_id]).to eq(item_params[:merchant_id])
-
-    # expect(json_response[:data]).to have_key(:relationships)
   end
 
   it 'Items#update' do
@@ -69,9 +64,8 @@ RSpec.describe 'Items endpoints' do
     update_item_params = { name: "New Item Name" }
     headers = { "CONTENT_TYPE" => "application/json" }
 
-    put "/api/v1/items/#{item_id}", params: update_item_params#, headers: headers
+    put "/api/v1/items/#{item_id}", params: JSON.generate(update_item_params), headers: headers
 
-    # put "/api/v1/items/#{item_id}", params: JSON.generate({item: update_item_params}), headers: headers
     expect(response).to be_successful
     expect(response.content_type).to eq("application/json")
 
@@ -95,7 +89,6 @@ RSpec.describe 'Items endpoints' do
     expect(response).to be_successful
     expect(response.body).to be_empty
     expect(response.status).to eq(204)
-    # expect(response.content_type).to eq("application/json")
 
     expect{Item.find(item.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
