@@ -2,7 +2,7 @@ class Api::V1::Items::SearchController < ApplicationController
   def show
     attribute = request.query_parameters.keys.first
     search_value = request.query_parameters.values.first
-    item = Item.where("#{attribute} LIKE '%#{search_value}%'").first
+    item = Item.where("lower(#{attribute}) LIKE '%#{search_value.downcase}%'").first
     # if params[:id]
     #   item = Item.find(params[:id])
     # elsif params[:name]

@@ -36,8 +36,8 @@ RSpec.describe 'Items search endpoints' do
       expect(search_results_json[:data][:attributes][:merchant_id]).to eq(@found_item_1.merchant_id)
     end
 
-    it 'Can find a single item by a fragment of its name' do
-      get "/api/v1/items/find?name=#{@found_item_1.name[2..6]}"
+    it 'Can find a single item by a fragment of its name, insensitive to case' do
+      get "/api/v1/items/find?name=#{@found_item_1.name[2..6].upcase}"
       expect(response).to be_successful
       expect(response.content_type).to eq("application/json")
 
