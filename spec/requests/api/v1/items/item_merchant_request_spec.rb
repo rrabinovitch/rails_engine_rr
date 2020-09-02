@@ -13,6 +13,6 @@ RSpec.describe 'Item Merchant endpoint' do
     expect(item_merchant_json[:data][:id]).to eq(merchant.id.to_s)
     expect(item_merchant_json[:data][:type]).to eq("merchant")
     expect(item_merchant_json[:data][:attributes][:name]).to eq(merchant.name)
-    expect(item_merchant_json[:data][:relationships][:items][:data].first[:id]).to eq(item.id.to_s)
+    # expect(item_merchant_json[:data][:relationships][:items][:data].first[:id]).to eq(item.id.to_s)
   end
 end

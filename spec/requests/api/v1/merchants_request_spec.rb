@@ -14,7 +14,7 @@ RSpec.describe 'Merchants endpoints' do
     expect(merchants_json[:data].first[:type]).to eq("merchant")
     expect(merchants_json[:data].first).to have_key(:attributes)
     expect(merchants_json[:data].first[:attributes]).to have_key(:name)
-    expect(merchants_json[:data].first).to have_key(:relationships)
+    # expect(merchants_json[:data].first).to have_key(:relationships)
   end
 
   it 'Merchants#show' do
@@ -30,7 +30,7 @@ RSpec.describe 'Merchants endpoints' do
     expect(merchant_json[:data][:type]).to eq("merchant")
     expect(merchant_json[:data]).to have_key(:attributes)
     expect(merchant_json[:data][:attributes]).to have_key(:name)
-    expect(merchant_json[:data]).to have_key(:relationships)
+    # expect(merchant_json[:data]).to have_key(:relationships)
   end
 
   it 'Merchants#create' do
@@ -48,7 +48,7 @@ RSpec.describe 'Merchants endpoints' do
     expect(json_response[:data][:id]).to eq(merchant.id.to_s)
     expect(json_response[:data][:type]).to eq("merchant")
     expect(json_response[:data][:attributes][:name]).to eq(merchant_params[:name])
-    expect(json_response[:data]).to have_key(:relationships)
+    # expect(json_response[:data]).to have_key(:relationships)
   end
 
   it 'Merchants#update' do
@@ -79,7 +79,8 @@ RSpec.describe 'Merchants endpoints' do
 
     expect{ delete "/api/v1/merchants/#{merchant.id}" }.to change(Merchant, :count).by(-1)
     expect(response).to be_successful
-    expect(response.content_type).to eq("application/json")
+    expect(response.body).to be_empty
+    expect(response.status).to eq(204)
 
     expect{Merchant.find(merchant.id)}.to raise_error(ActiveRecord::RecordNotFound)
   end
