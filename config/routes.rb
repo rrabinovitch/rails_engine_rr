@@ -11,9 +11,6 @@ Rails.application.routes.draw do
       resources :merchants, except: [:new, :edit] do
         resources :items, only: [:index], module: :merchants
       end
-
-
-
     end
   end
 end
