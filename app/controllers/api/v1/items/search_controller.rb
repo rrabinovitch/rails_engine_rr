@@ -7,6 +7,8 @@ class Api::V1::Items::SearchController < ApplicationController
       # model method can identify whether to search for id/unit_price or other attributes
     if params[:id] || params[:unit_price]
       item = Item.find_by("#{attribute}": search_value)
+    # elsif params[:created_at] || params[:updated_at]
+    #   binding.pry
     else
       item = Item.find_by("#{attribute} ILIKE '%#{search_value}%'")
     end
