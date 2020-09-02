@@ -24,7 +24,7 @@ RSpec.describe 'Items search endpoints' do
     end
 
     it 'Can find a single item by its full name' do
-      get "/api/v1/items/find?id="
+
     end
 
     it 'Can find a single item by a fragment of its name' do
