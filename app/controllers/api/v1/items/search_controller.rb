@@ -16,7 +16,7 @@ class Api::V1::Items::SearchController < ApplicationController
   end
 
   def index
-    items = Item.where("#{attribute} ILIKE '%#{search_value}'")
+    items = Item.where("#{attribute} ILIKE '%#{search_value}%'")
     render json: ItemSerializer.new(items)
   end
 

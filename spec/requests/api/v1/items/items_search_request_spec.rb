@@ -21,8 +21,8 @@ RSpec.describe 'Items search endpoints' do
       expect(search_results_json[:data][:attributes][:merchant_id]).to eq(@found_item.merchant_id)
     end
 
-    it 'Can find a single item by its full name' do
-      get "/api/v1/items/find?name=#{@found_item.name}"
+    it 'Can find a single item by its full name, insensitive to case' do
+      get "/api/v1/items/find?name=#{@found_item.name.upcase}"
       expect(response).to be_successful
       expect(response.content_type).to eq("application/json")
 
@@ -109,8 +109,25 @@ RSpec.describe 'Items search endpoints' do
   end
 
   describe 'Multi-finders' do
-    it 'Can find set of items by name' do
-      get "/api/v1/items/find_all?name=#{@found_item.name}"
+    it 'Can find set of items by full name, insensitive to case' do
+      get "/api/v1/items/find_all?name=#{@found_item.name.upcase}"
+      expect(response).to be_successful
+      expect(response.content_type).to eq("application/json")
+
+      search_results_json = JSON.parse(response.body, symbolize_names: true)
+      expect(search_results_json[:data].count).to eq(4)
+      expect(search_results_json[:data].first).to have_key(:id)
+      expect(search_results_json[:data].first[:type]).to eq("item")
+      expect(search_results_json[:data].first).to have_key(:attributes)
+      expect(search_results_json[:data].first[:attributes]).to have_key(:name)
+      expect(search_results_json[:data].first[:attributes]).to have_key(:description)
+      expect(search_results_json[:data].first[:attributes]).to have_key(:unit_price)
+      expect(search_results_json[:data].first[:attributes]).to have_key(:merchant_id)
+    end
+
+    it 'Can find set of items by name fragment, insensitive to case' do
+      search_value = @found_item.name[2..6].upcase
+      get "/api/v1/items/find_all?name=#{search_value}"
       expect(response).to be_successful
       expect(response.content_type).to eq("application/json")
 
