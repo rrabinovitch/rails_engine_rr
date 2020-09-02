@@ -16,7 +16,6 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def destroy
-    # render json: ItemSerializer.new(Item.destroy(params[:id]))
     Item.destroy(params[:id])
   end
 
