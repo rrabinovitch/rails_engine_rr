@@ -1,27 +1,20 @@
 require 'csv'
 
 namespace :seed_from_csv do
-  desc "delete data and reset primary key sequence"
-  task destroy: :environment do
-    Transaction.destroy_all
-    InvoiceItem.destroy_all
-    Item.destroy_all
-    Invoice.destroy_all
-    Merchant.destroy_all
-    Customer.destroy_all
+  desc "reset database"
+  task reset: :environment do
+    Rake::Task["db:drop"].execute
+    Rake::Task["db:create"].execute
+    Rake::Task["db:migrate"].execute
 
-    ActiveRecord::Base.connection.tables.each do |t|
-      ActiveRecord::Base.connection.reset_pk_sequence!(t)
-    end
-
-    puts "All records have been destroyed and primary keys reset."
+    puts "All records have been destroyed."
   end
 
   desc "seed customers"
   task customers: :environment do
     file = "./db/csv_seeds/customers.csv"
     CSV.foreach(file, headers: true) do |row|
-      Customer.create(row.to_h)
+      Customer.create!(row.to_h)
     end
 
     puts "Seeded #{Customer.all.count} customers."
@@ -31,10 +24,11 @@ namespace :seed_from_csv do
   task invoice_items: :environment do
     file = "./db/csv_seeds/invoice_items.csv"
     CSV.foreach(file, headers: true) do |row|
-      if row["unit_price"]
-        row["unit_price"] = (row["unit_price"].to_f / 100).round(2)
+      data = row.to_h
+      if data["unit_price"]
+        data["unit_price"] = (data["unit_price"].to_f / 100).round(2)
       end
-      InvoiceItem.create(row.to_h)
+      InvoiceItem.create!(data)
     end
 
     puts "Seeded #{InvoiceItem.all.count} invoice items."
@@ -44,7 +38,7 @@ namespace :seed_from_csv do
   task invoices: :environment do
     file = "./db/csv_seeds/invoices.csv"
     CSV.foreach(file, headers: true) do |row|
-      Invoice.create(row.to_h)
+      Invoice.create!(row.to_h)
     end
 
     puts "Seeded #{Invoice.all.count} invoices."
@@ -54,10 +48,11 @@ namespace :seed_from_csv do
   task items: :environment do
     file = "./db/csv_seeds/items.csv"
     CSV.foreach(file, headers: true) do |row|
-      if row["unit_price"]
-        row["unit_price"] = (row["unit_price"].to_f / 100).round(2)
+      data = row.to_h
+      if data["unit_price"]
+        data["unit_price"] = (data["unit_price"].to_f / 100).round(2)
       end
-      Item.create(row.to_h)
+      Item.create!(data)
     end
 
     puts "Seeded #{Item.all.count} items."
@@ -67,7 +62,7 @@ namespace :seed_from_csv do
   task merchants: :environment do
     file = "./db/csv_seeds/merchants.csv"
     CSV.foreach(file, headers: true) do |row|
-      Merchant.create(row.to_h)
+      Merchant.create!(row.to_h)
     end
 
     puts "Seeded #{Merchant.all.count} merchants."
@@ -77,11 +72,20 @@ namespace :seed_from_csv do
   task transactions: :environment do
     file = "./db/csv_seeds/transactions.csv"
     CSV.foreach(file, headers: true) do |row|
-      Transaction.create(row.to_h)
+      Transaction.create!(row.to_h)
     end
 
     puts "Seeded #{Transaction.all.count} transactions."
   end
 
-  task :all => [:destroy, :customers, :merchants, :items, :invoices, :invoice_items, :transactions]
+  desc "reset primary keys"
+  task pk_reset: :environment do
+    ActiveRecord::Base.connection.tables.each do |t|
+      ActiveRecord::Base.connection.reset_pk_sequence!(t)
+    end
+
+    puts "Primary keys have been reset."
+  end
+
+  task :all => [:reset, :customers, :merchants, :items, :invoices, :invoice_items, :transactions, :pk_reset]
 end
