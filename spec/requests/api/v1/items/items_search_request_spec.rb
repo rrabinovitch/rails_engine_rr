@@ -16,11 +16,10 @@ RSpec.describe 'Items search endpoints' do
       search_results_json = JSON.parse(response.body, symbolize_names: true)
       expect(search_results_json[:data][:id]).to eq(@found_item_1.id.to_s)
       expect(search_results_json[:data][:type]).to eq("item")
-      expect(search_results_json[:data]).to have_key(:attributes)
-      expect(search_results_json[:data][:attributes]).to have_key(:name)
-      expect(search_results_json[:data][:attributes]).to have_key(:description)
-      expect(search_results_json[:data][:attributes]).to have_key(:unit_price)
-      expect(search_results_json[:data][:attributes]).to have_key(:merchant_id)
+      expect(search_results_json[:data][:attributes][:name]).to eq(@found_item_1.name)
+      expect(search_results_json[:data][:attributes][:description]).to eq(@found_item_1.description)
+      expect(search_results_json[:data][:attributes][:unit_price]).to eq(@found_item_1.unit_price)
+      expect(search_results_json[:data][:attributes][:merchant_id]).to eq(@found_item_1.merchant_id)
     end
 
     it 'Can find a single item by its full name' do
