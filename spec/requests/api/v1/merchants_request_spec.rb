@@ -14,7 +14,6 @@ RSpec.describe 'Merchants endpoints' do
     expect(merchants_json[:data].first[:type]).to eq("merchant")
     expect(merchants_json[:data].first).to have_key(:attributes)
     expect(merchants_json[:data].first[:attributes]).to have_key(:name)
-    # expect(merchants_json[:data].first).to have_key(:relationships)
   end
 
   it 'Merchants#show' do
@@ -30,14 +29,13 @@ RSpec.describe 'Merchants endpoints' do
     expect(merchant_json[:data][:type]).to eq("merchant")
     expect(merchant_json[:data]).to have_key(:attributes)
     expect(merchant_json[:data][:attributes]).to have_key(:name)
-    # expect(merchant_json[:data]).to have_key(:relationships)
   end
 
   it 'Merchants#create' do
     merchant_params = { name: "Fun Store" }
     headers = { "CONTENT_TYPE" => "application/json" }
 
-    post "/api/v1/merchants", params: JSON.generate({merchant: merchant_params}), headers: headers
+    post "/api/v1/merchants", params: JSON.generate(merchant_params), headers: headers
     expect(response).to be_successful
     expect(response.content_type).to eq("application/json")
 
@@ -48,7 +46,6 @@ RSpec.describe 'Merchants endpoints' do
     expect(json_response[:data][:id]).to eq(merchant.id.to_s)
     expect(json_response[:data][:type]).to eq("merchant")
     expect(json_response[:data][:attributes][:name]).to eq(merchant_params[:name])
-    # expect(json_response[:data]).to have_key(:relationships)
   end
 
   it 'Merchants#update' do
@@ -57,7 +54,7 @@ RSpec.describe 'Merchants endpoints' do
     update_merchant_params = { name: "New Merchant Name" }
     headers = { "CONTENT_TYPE" => "application/json" }
 
-    put "/api/v1/merchants/#{merchant_id}", params: JSON.generate({merchant: update_merchant_params}), headers: headers
+    put "/api/v1/merchants/#{merchant_id}", params: JSON.generate(update_merchant_params), headers: headers
     expect(response).to be_successful
     expect(response.content_type).to eq("application/json")
 
