@@ -67,5 +67,19 @@ RSpec.describe 'Merchants search endpoints' do
       expect(search_results_json[:data].first).to have_key(:attributes)
       expect(search_results_json[:data].first[:attributes]).to have_key(:name)
     end
+
+    it 'Can find multiple merchants by name fragment, insensitive to case' do
+      search_value = @found_merchant.name[0..2].upcase
+      get "/api/v1/items/find_all?name=#{search_value}"
+      expect(response).to be_successful
+      expect(response.content_type).to eq("application/json")
+
+      search_results_json = JSON.parse(response.body, symbolize_names: true)
+      expect(search_results_json[:data].count).to eq(4)
+      expect(search_results_json[:data].first).to have_key(:id)
+      expect(search_results_json[:data].first[:type]).to eq("merchant")
+      expect(search_results_json[:data].first).to have_key(:attributes)
+      expect(search_results_json[:data].first[:attributes]).to have_key(:name)
+    end
   end
 end
