@@ -42,8 +42,19 @@ RSpec.describe 'Merchants search endpoints' do
       expect(search_results_json[:data][:attributes][:name]).to eq(@found_merchant.name)
     end
 
-    xit 'Can find a single merchant by the date it was created' do
+    xit 'Can find a single merchant by the date created' do
       get "/api/v1/merchants/find?created_at=#{@found_merchant.created_at}"
+      expect(response).to be_successful
+      expect(response.content_type).to eq("application/json")
+
+      search_results_json = JSON.parse(response.body, symbolize_names: true)
+      expect(search_results_json[:data][:id]).to eq(@found_merchant.id.to_s)
+      expect(search_results_json[:data][:type]).to eq("merchant")
+      expect(search_results_json[:data][:attributes][:name]).to eq(@found_merchant.name)
+    end
+
+    xit 'Can find a single merchant by the date updated' do
+      get "/api/v1/merchants/find?updated_at=#{@found_merchant.updated_at}"
       expect(response).to be_successful
       expect(response.content_type).to eq("application/json")
 
@@ -71,6 +82,32 @@ RSpec.describe 'Merchants search endpoints' do
     it 'Can find multiple merchants by name fragment, insensitive to case' do
       search_value = @found_merchant.name[0..2].upcase
       get "/api/v1/merchants/find_all?name=#{search_value}"
+      expect(response).to be_successful
+      expect(response.content_type).to eq("application/json")
+
+      search_results_json = JSON.parse(response.body, symbolize_names: true)
+      expect(search_results_json[:data].count).to eq(4)
+      expect(search_results_json[:data].first).to have_key(:id)
+      expect(search_results_json[:data].first[:type]).to eq("merchant")
+      expect(search_results_json[:data].first).to have_key(:attributes)
+      expect(search_results_json[:data].first[:attributes]).to have_key(:name)
+    end
+
+    xit 'Can find multiple merchants by date created' do
+      get "/api/v1/merchants/find_all?created_at=#{@found_merchant.created_at}"
+      expect(response).to be_successful
+      expect(response.content_type).to eq("application/json")
+
+      search_results_json = JSON.parse(response.body, symbolize_names: true)
+      expect(search_results_json[:data].count).to eq(4)
+      expect(search_results_json[:data].first).to have_key(:id)
+      expect(search_results_json[:data].first[:type]).to eq("merchant")
+      expect(search_results_json[:data].first).to have_key(:attributes)
+      expect(search_results_json[:data].first[:attributes]).to have_key(:name)
+    end
+
+    xit 'Can find multiple merchants by date updated' do
+      get "/api/v1/merchants/find_all?updated_at=#{@found_merchant.updated_at}"
       expect(response).to be_successful
       expect(response.content_type).to eq("application/json")
 
