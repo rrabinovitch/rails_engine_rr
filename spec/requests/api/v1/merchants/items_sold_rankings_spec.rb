@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchants by most revenue endpoint' do
-  it 'Can return top 3 merchants ranked by total revenue' do
+RSpec.describe 'Merchants by most items sold' do
+  it 'Can return top 3 merchants ranked by total number items sold' do
     merch_1, merch_2, merch_3, merch_4, merch_5 = create_list(:merchant, 5)
 
     item_1 = create(:item, merchant: merch_1, unit_price: 10)
@@ -36,7 +36,7 @@ RSpec.describe 'Merchants by most revenue endpoint' do
 
     amt = 3
 
-    get "/api/v1/merchants/most_revenue?quantity=#{amt}"
+    get "/api/v1/merchants/most_items?quantity=#{amt}"
     expect(response).to be_successful
     expect(response.content_type).to eq("application/json")
 
