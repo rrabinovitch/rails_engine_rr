@@ -77,6 +77,9 @@ RSpec.describe 'Merchants search endpoints' do
       expect(search_results_json[:data].first[:type]).to eq("merchant")
       expect(search_results_json[:data].first).to have_key(:attributes)
       expect(search_results_json[:data].first[:attributes]).to have_key(:name)
+      search_results_json[:data].each do |merchant_data|
+        expect(merchant_data[:id]).to_not eq(@not_found_merchant.id)
+      end
     end
 
     it 'Can find multiple merchants by name fragment, insensitive to case' do
@@ -91,6 +94,9 @@ RSpec.describe 'Merchants search endpoints' do
       expect(search_results_json[:data].first[:type]).to eq("merchant")
       expect(search_results_json[:data].first).to have_key(:attributes)
       expect(search_results_json[:data].first[:attributes]).to have_key(:name)
+      search_results_json[:data].each do |merchant_data|
+        expect(merchant_data[:id]).to_not eq(@not_found_merchant.id)
+      end
     end
 
     xit 'Can find multiple merchants by date created' do
@@ -104,6 +110,9 @@ RSpec.describe 'Merchants search endpoints' do
       expect(search_results_json[:data].first[:type]).to eq("merchant")
       expect(search_results_json[:data].first).to have_key(:attributes)
       expect(search_results_json[:data].first[:attributes]).to have_key(:name)
+      search_results_json[:data].each do |merchant_data|
+        expect(merchant_data[:id]).to_not eq(@not_found_merchant.id)
+      end
     end
 
     xit 'Can find multiple merchants by date updated' do
@@ -117,6 +126,9 @@ RSpec.describe 'Merchants search endpoints' do
       expect(search_results_json[:data].first[:type]).to eq("merchant")
       expect(search_results_json[:data].first).to have_key(:attributes)
       expect(search_results_json[:data].first[:attributes]).to have_key(:name)
+      search_results_json[:data].each do |merchant_data|
+        expect(merchant_data[:id]).to_not eq(@not_found_merchant.id)
+      end
     end
   end
 end

@@ -124,7 +124,9 @@ RSpec.describe 'Items search endpoints' do
       expect(search_results_json[:data].first[:attributes]).to have_key(:description)
       expect(search_results_json[:data].first[:attributes]).to have_key(:unit_price)
       expect(search_results_json[:data].first[:attributes]).to have_key(:merchant_id)
-      # add expectation to not have not_found_item
+      search_results_json[:data].each do |item_data|
+        expect(item_data[:id]).to_not eq(@not_found_item.id)
+      end
     end
 
     it 'Can find multiple items by name fragment, insensitive to case' do
@@ -142,7 +144,9 @@ RSpec.describe 'Items search endpoints' do
       expect(search_results_json[:data].first[:attributes]).to have_key(:description)
       expect(search_results_json[:data].first[:attributes]).to have_key(:unit_price)
       expect(search_results_json[:data].first[:attributes]).to have_key(:merchant_id)
-      # add expectation to not have not_found_item
+      search_results_json[:data].each do |item_data|
+        expect(item_data[:id]).to_not eq(@not_found_item.id)
+      end
     end
 
     it 'Can find multiple items by description fragment, insensitive to case' do
@@ -160,7 +164,9 @@ RSpec.describe 'Items search endpoints' do
       expect(search_results_json[:data].first[:attributes]).to have_key(:description)
       expect(search_results_json[:data].first[:attributes]).to have_key(:unit_price)
       expect(search_results_json[:data].first[:attributes]).to have_key(:merchant_id)
-      # add expectation to not have not_found_item
+      search_results_json[:data].each do |item_data|
+        expect(item_data[:id]).to_not eq(@not_found_item.id)
+      end
     end
 
     it 'Can find mulitple items by price' do
@@ -177,6 +183,9 @@ RSpec.describe 'Items search endpoints' do
       expect(search_results_json[:data].first[:attributes]).to have_key(:description)
       expect(search_results_json[:data].first[:attributes]).to have_key(:unit_price)
       expect(search_results_json[:data].first[:attributes]).to have_key(:merchant_id)
+      search_results_json[:data].each do |item_data|
+        expect(item_data[:id]).to_not eq(@not_found_item.id)
+      end
     end
 
     xit 'Can find multiple items by the date created' do
@@ -193,6 +202,9 @@ RSpec.describe 'Items search endpoints' do
       expect(search_results_json[:data].first[:attributes]).to have_key(:description)
       expect(search_results_json[:data].first[:attributes]).to have_key(:unit_price)
       expect(search_results_json[:data].first[:attributes]).to have_key(:merchant_id)
+      search_results_json[:data].each do |item_data|
+        expect(item_data[:id]).to_not eq(@not_found_item.id)
+      end
     end
 
     xit 'Can find a single item by the date updated' do
@@ -209,6 +221,9 @@ RSpec.describe 'Items search endpoints' do
       expect(search_results_json[:data].first[:attributes]).to have_key(:description)
       expect(search_results_json[:data].first[:attributes]).to have_key(:unit_price)
       expect(search_results_json[:data].first[:attributes]).to have_key(:merchant_id)
+      search_results_json[:data].each do |item_data|
+        expect(item_data[:id]).to_not eq(@not_found_item.id)
+      end
     end
   end
 end
