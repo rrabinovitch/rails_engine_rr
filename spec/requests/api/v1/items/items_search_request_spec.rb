@@ -79,34 +79,6 @@ RSpec.describe 'Items search endpoints' do
       expect(search_results_json[:data][:attributes][:unit_price]).to eq(@found_item.unit_price)
       expect(search_results_json[:data][:attributes][:merchant_id]).to eq(@found_item.merchant_id)
     end
-
-    xit 'Can find a single item by the date created' do
-      get "/api/v1/items/find?created_at=#{@found_item.created_at}"
-      expect(response).to be_successful
-      expect(response.content_type).to eq("application/json")
-
-      search_results_json = JSON.parse(response.body, symbolize_names: true)
-      expect(search_results_json[:data][:id]).to eq(@found_item.id.to_s)
-      expect(search_results_json[:data][:type]).to eq("item")
-      expect(search_results_json[:data][:attributes][:name]).to eq(@found_item.name)
-      expect(search_results_json[:data][:attributes][:description]).to eq(@found_item.description)
-      expect(search_results_json[:data][:attributes][:unit_price]).to eq(@found_item.unit_price)
-      expect(search_results_json[:data][:attributes][:merchant_id]).to eq(@found_item.merchant_id)
-    end
-
-    xit 'Can find a single item by the date updated' do
-      get "/api/v1/items/find?updated_at=#{@found_item.updated_at}"
-      expect(response).to be_successful
-      expect(response.content_type).to eq("application/json")
-
-      search_results_json = JSON.parse(response.body, symbolize_names: true)
-      expect(search_results_json[:data][:id]).to eq(@found_item.id.to_s)
-      expect(search_results_json[:data][:type]).to eq("item")
-      expect(search_results_json[:data][:attributes][:name]).to eq(@found_item.name)
-      expect(search_results_json[:data][:attributes][:description]).to eq(@found_item.description)
-      expect(search_results_json[:data][:attributes][:unit_price]).to eq(@found_item.unit_price)
-      expect(search_results_json[:data][:attributes][:merchant_id]).to eq(@found_item.merchant_id)
-    end
   end
 
   describe 'Multi-finders' do
@@ -171,44 +143,6 @@ RSpec.describe 'Items search endpoints' do
 
     it 'Can find mulitple items by price' do
       get "/api/v1/items/find_all?unit_price=#{@found_item.unit_price}"
-      expect(response).to be_successful
-      expect(response.content_type).to eq("application/json")
-
-      search_results_json = JSON.parse(response.body, symbolize_names: true)
-      expect(search_results_json[:data].count).to eq(4)
-      expect(search_results_json[:data].first).to have_key(:id)
-      expect(search_results_json[:data].first[:type]).to eq("item")
-      expect(search_results_json[:data].first).to have_key(:attributes)
-      expect(search_results_json[:data].first[:attributes]).to have_key(:name)
-      expect(search_results_json[:data].first[:attributes]).to have_key(:description)
-      expect(search_results_json[:data].first[:attributes]).to have_key(:unit_price)
-      expect(search_results_json[:data].first[:attributes]).to have_key(:merchant_id)
-      search_results_json[:data].each do |item_data|
-        expect(item_data[:id]).to_not eq(@not_found_item.id)
-      end
-    end
-
-    xit 'Can find multiple items by the date created' do
-      get "/api/v1/items/find_all?created_at=#{@found_item.created_at}"
-      expect(response).to be_successful
-      expect(response.content_type).to eq("application/json")
-
-      search_results_json = JSON.parse(response.body, symbolize_names: true)
-      expect(search_results_json[:data].count).to eq(4)
-      expect(search_results_json[:data].first).to have_key(:id)
-      expect(search_results_json[:data].first[:type]).to eq("item")
-      expect(search_results_json[:data].first).to have_key(:attributes)
-      expect(search_results_json[:data].first[:attributes]).to have_key(:name)
-      expect(search_results_json[:data].first[:attributes]).to have_key(:description)
-      expect(search_results_json[:data].first[:attributes]).to have_key(:unit_price)
-      expect(search_results_json[:data].first[:attributes]).to have_key(:merchant_id)
-      search_results_json[:data].each do |item_data|
-        expect(item_data[:id]).to_not eq(@not_found_item.id)
-      end
-    end
-
-    xit 'Can find a single item by the date updated' do
-      get "/api/v1/items/find_all?updated_at=#{@found_item.updated_at}"
       expect(response).to be_successful
       expect(response.content_type).to eq("application/json")
 

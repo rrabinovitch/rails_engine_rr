@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Merchants with most revenue endpoint' do
+RSpec.describe 'Merchants by most revenue endpoint' do
   it 'Can return top 3 merchants ranked by total revenue' do
     merch_1, merch_2, merch_3, merch_4, merch_5 = create_list(:merchant, 5)
 
