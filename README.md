@@ -43,7 +43,8 @@ You can see this API in action through the front-end RailsDriver application, Po
 * Consumption via Postman
     * Check out my Postman collection [here](https://www.postman.com/collections/da1d052829d18626e5cd) to see a snapshot of the unique endpoints available via this API.
 * Consumption via browser
-    * _instructions to be completed soon!_
+    * From within the RailsEngine directory, launch the local server: `rails s`
+    * Explore the endpoints listed below by prefixing them with `localhost:3000/api/v1`
 
 ### Endpoints
 _instructions to be completed soon!_
