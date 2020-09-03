@@ -41,8 +41,7 @@ You can see this API in action through the front-end RailsDriver application, Po
     * From within the RailsDriver directory (in another terminal window), launch the server on another port: `rails s - 3001`
     * Navigate your browser to `localhost:3001` and explore!
 * Consumption via Postman
-    * Download Postman [here](https://www.postman.com/downloads/)
-    * _instructions to be completed soon!_
+    * Check out my Postman collection [here](https://www.postman.com/collections/da1d052829d18626e5cd) to see a snapshot of the unique endpoints available via this API.
 * Consumption via browser
     * _instructions to be completed soon!_
 
