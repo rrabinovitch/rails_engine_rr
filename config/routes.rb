@@ -9,6 +9,10 @@ Rails.application.routes.draw do
         get '/:id/merchant', to: 'merchant#show'
       end
 
+      namespace :merchants do
+        get '/find', to: 'search#show'
+      end
+
       resources :merchants, except: [:new, :edit] do
         resources :items, only: [:index], module: :merchants
       end
