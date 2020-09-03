@@ -70,7 +70,7 @@ RSpec.describe 'Merchants search endpoints' do
 
     it 'Can find multiple merchants by name fragment, insensitive to case' do
       search_value = @found_merchant.name[0..2].upcase
-      get "/api/v1/items/find_all?name=#{search_value}"
+      get "/api/v1/merchants/find_all?name=#{search_value}"
       expect(response).to be_successful
       expect(response.content_type).to eq("application/json")
 
