@@ -34,4 +34,17 @@ This solo project was build for [Mod3](https://backend.turing.io/module3/) of Tu
     * From within the RailsDriver directory (in another terminal window), run `bundle exec rspec`
     * _Note: As of September 3, 2020 there are 2 business intelligence tests in the spec harness not yet passing_
 
-## Endpoints
+## API Consumption
+You can see this API in action through the front-end RailsDriver application, Postman, or in your browser.
+* Consumption via RailsDriver:
+    * From within the RailsEngine directory, launch the local server: `rails `
+    * From within the RailsDriver directory (in another terminal window), launch the server on another port: `rails s - 3001`
+    * Navigate your browser to `localhost:3001` and explore!
+* Consumption via Postman
+    * Download Postman [here](https://www.postman.com/downloads/)
+    * _instructions to be completed soon!_
+* Consumption via browser
+    * _instructions to be completed soon!_
+
+### Endpoints
+_instructions to be completed soon!_
