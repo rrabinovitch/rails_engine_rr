@@ -42,8 +42,10 @@ RSpec.describe 'Merchants with most revenue endpoint' do
 
     results_json = JSON.parse(response.body, symbolize_names: true)
     expect(results_json[:data].count).to eq(3)
-    expect(results_json[:data][:id]).to eq(merch_1.id.to_s)
-    expect(results_json[:data][:type]).to eq("merchant")
-    expect(results_json[:data][:attributes]).to have_key(:name)
+    expect(results_json[:data][0][:id]).to eq(merch_1.id.to_s)
+    expect(results_json[:data][0][:type]).to eq("merchant")
+    expect(results_json[:data][0][:attributes]).to have_key(:name)
+    expect(results_json[:data][1][:id]).to eq(merch_2.id.to_s)
+    expect(results_json[:data][2][:id]).to eq(merch_3.id.to_s)
   end
 end
