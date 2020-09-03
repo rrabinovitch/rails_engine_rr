@@ -1,13 +1,18 @@
 class Api::V1::Merchants::SearchController < ApplicationController
   def show
     if params[:id]
-      item = Merchant.find_by("#{attribute}": search_value)
+      merchant = Merchant.find_by("#{attribute}": search_value)
     # elsif params[:created_at] || params[:updated_at]
-    #   LOGIC FOR FINDING ITEM BY CREATED_AT AND UPDATED_AT ATTRIBUTES
+    #   LOGIC FOR FINDING MERCHANT BY CREATED_AT AND UPDATED_AT ATTRIBUTES
     else
-      item = Merchant.find_by("#{attribute} ILIKE '%#{search_value}%'")
+      merchant = Merchant.find_by("#{attribute} ILIKE '%#{search_value}%'")
     end
-    render json: MerchantSerializer.new(item)
+    render json: MerchantSerializer.new(merchant)
+  end
+  
+  def index
+    merchants = Merchant.where("#{attribute} ILIKE '%#{search_value}%'")
+    render json: MerchantSerializer.new(merchants)
   end
 
   private
