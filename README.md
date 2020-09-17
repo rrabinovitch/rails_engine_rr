@@ -25,7 +25,7 @@ This solo project was build for [Mod3](https://backend.turing.io/module3/) of Tu
     * `bundle install`
     * `rake db:{create, migrate}`
     * `figaro install`
-    * Within the `config/application.yml` file that this last command created, add the key-pair value `RAILS_ENGINE_DOMAIN: http://localhost:3000`
+    * Within the `config/application.yml` file that this last command created, add the key-value pair `RAILS_ENGINE_DOMAIN: http://localhost:3000`
 
 ## Testing
 * To run the RailsDriver test suite: run `bundle exec rspec` from within the RailsDriver directory
