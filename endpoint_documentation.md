@@ -1,11 +1,11 @@
-### Endpoints
+## Endpoints
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/da1d052829d18626e5cd)
 * responses are JSON API 1.0 Compliant
 * GET requests require params submitted via query params
 * POST requests require params submitted via the request body
 * make sure to follow the local set up instructions above and run `rails s` before consuming these endpoints 
 
-#### GET ITEMS
+### GET ITEMS
 Returns all records of items
 Request: `GET localhost:3000/api/v1/items` 
 
@@ -38,13 +38,13 @@ Response body:
 }
         
 ```
-#### GET MERCHANTS
+### GET MERCHANTS
 Returns all records of items
 Request: `GET localhost:3000/api/v1/road_trip` 
 * body must include `origin`, `destination`, and `api_key` params
 * you will receive a 401 unauthorized error if bad credentials are submitted
 
-##### Example:
+#### Example:
 Request: `POST localhost:3000/api/v1/road_trip`  
 Request body:
 ```
