@@ -55,4 +55,4 @@ You can see this API in action through the front-end RailsDriver application, Po
 * responses are JSON API 1.0 Compliant
 * GET requests require params submitted via query params
 * POST requests require params submitted via the request body
-* make sure to follow the local set up instructions above and run `rails s` before consuming these endpoints
+* if exploring endpoints locally, make sure to first follow the [local set up instructions](https://app.getpostman.com/run-collection/da1d052829d18626e5cd) and run `rails s`
