@@ -5,89 +5,60 @@
 * POST requests require params submitted via the request body
 * make sure to follow the [local set up instructions](https://github.com/rrabinovitch/rails_engine_rr/blob/master/README.md#local-setup) and run `rails s` before consuming these endpoints 
 
-### GET ITEMS
-Returns all records of items
-Request: `GET localhost:3000/api/v1/items` 
-
-Response body:
-```
-{
-    "data": [
+### ITEMS
+* items#index: `GET /items` - returns records of all items in the database
+* items#show: `GET /items/<item_id>` - returns the record of the item with the corresponding id
+* items#create: `POST /items` - creates a new item record with the attributes submitted via the request body and returns the new item record
+    * request body:
+        ```
         {
-            "id": "1",
-            "type": "item",
-            "attributes": {
-                "name": "Item Qui Esse",
-                "description": "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.",
-                "unit_price": 751.07,
-                "merchant_id": 1
-            }
-        },
-        {
-            "id": "2",
-            "type": "item",
-            "attributes": {
-                "name": "Item Autem Minima",
-                "description": "Cumque consequuntur ad. Fuga tenetur illo molestias enim aut iste. Provident quo hic aut. Aut quidem voluptates dolores. Dolorem quae ab alias tempora.",
-                "unit_price": 670.76,
-                "merchant_id": 1
-            }
-        },
-      ...<remaining item records>...
-    ]
-}
-        
-```
-### GET MERCHANTS
-Returns all records of items
-Request: `GET localhost:3000/api/v1/road_trip` 
-* body must include `origin`, `destination`, and `api_key` params
-* you will receive a 401 unauthorized error if bad credentials are submitted
-
-#### Example:
-Request: `POST localhost:3000/api/v1/road_trip`  
-Request body:
-```
-{"origin": "Denver, CO",
-   "destination": "Pueblo, CO",
-   "api_key": "9167e13a-9fb2-49c9-8165-c64c2ff335b1"}
-```
-Response body:
-```
-{
-    "data": [
-        {
-            "id": "1",
-            "type": "item",
-            "attributes": {
-                "name": "Item Qui Esse",
-                "description": "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.",
-                "unit_price": 751.07,
-                "merchant_id": 1
-            }
-        },
-        {
-            "id": "2",
-            "type": "item",
-            "attributes": {
-                "name": "Item Autem Minima",
-                "description": "Cumque consequuntur ad. Fuga tenetur illo molestias enim aut iste. Provident quo hic aut. Aut quidem voluptates dolores. Dolorem quae ab alias tempora.",
-                "unit_price": 670.76,
-                "merchant_id": 1
-            }
-        },
-        {
-            "id": "3",
-            "type": "item",
-            "attributes": {
-                "name": "Item Ea Voluptatum",
-                "description": "Sunt officia eum qui molestiae. Nesciunt quidem cupiditate reiciendis est commodi non. Atque eveniet sed. Illum excepturi praesentium reiciendis voluptatibus eveniet odit perspiciatis. Odio optio nisi rerum nihil ut.",
-                "unit_price": 323.01,
-                "merchant_id": 1
-            }
-         ..<remaining item records>..
+        "name": "<item name>,
+        "description": "<item description>",
+        "unit_price": "<item price>",
+        "merchant_id": "<id of merchant selling this item>"
         }
-    ]
-}
-        
-```
+        ```
+* items#update: `POST /items/<item_id>` - updates the record of the item with the corresponding id and returns the updated record (can be used to update one or many attributes)
+    * request body:
+        ```
+        {"<attribute>": "<updated attribute value>"}
+        ```
+* items#destroy: `DELETE /items/<item_id` - deletes the record of the item with the corresponding id and renders a `204 no content` response
+
+### MERCHANTS
+* merchants#index: `GET /merchants` - returns records of all merchants in the database
+* merchants#show: `GET /merchants/<merchant_id>` - returns the record of the merchant with the corresponding id
+* merchants#create: `POST /merchants` - creates a new merchant record with the attributes submitted via the request body and returns the new merchant record
+    * request body:
+        ```
+        {"name": "<merchant name>"}
+        ```
+* merchants#update: `POST /merchant/<merchant_id>` - updates the record of the merchant with the corresponding id and returns the updated record
+    * request body:
+        ```
+        {"<attribute>": "<updated attribute value>"}
+        ```
+* merchants#destroy: `DELETE /merchant/<merchant_id` - deletes the record of the merchant with the corresponding id and renders a `204 no content` response
+
+### RELATIONSHIPS
+* Merchant items: `GET /merchants/<merchant_id>/items` - returns all items associated with the merchant with the corresponding id
+* Item merchant: `GET /items/<item_id>/merchant` - returns the merchant associated with the item with the corresponding id
+
+### FINDERS
+* items can be searched for by id, name, description, and unit price
+* merchants can be searched for by id and name  
+* future iterations may allow for searching by the date a record was created and/or updated
+
+**Single finders:** return the first record found with the matching attribute
+    * `GET /items/find?<attribute>=<value>`
+    * `GET /merchants/find?<attribute>=<value>`
+**Multi finders:** return all records found with the matching attribute
+    * `GET /items/find_all?<attribute>=<value>`
+    * `GET /merchants/find_all?<attribute>=<value>`
+    
+
+###
+
+
+
+
