@@ -1,4 +1,4 @@
-## Endpoints
+## Endpoints - _in progress_
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/da1d052829d18626e5cd)
 * responses are JSON API 1.0 Compliant
 * GET requests require params submitted via query params
