@@ -3,7 +3,7 @@
 * responses are JSON API 1.0 Compliant
 * GET requests require params submitted via query params
 * POST requests require params submitted via the request body
-* make sure to follow the local set up instructions above and run `rails s` before consuming these endpoints 
+* make sure to follow the [local set up instructions](https://github.com/rrabinovitch/rails_engine_rr/blob/master/README.md#local-setup) and run `rails s` before consuming these endpoints 
 
 ### GET ITEMS
 Returns all records of items
