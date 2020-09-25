@@ -50,7 +50,7 @@ You can see this API in action through the front-end RailsDriver application, Po
          * A few quick examples you could try: `GET /items` • `GET /merchants` • `GET /merchants/most_revenue?quantity=7`
                
 
-### [Endpoint Documentation](https://github.com/rrabinovitch/rails_engine_rr/blob/master/endpoints_documentation.md#endpoints)
+### [Endpoint Documentation](https://github.com/rrabinovitch/rails_engine_rr/blob/master/endpoint_documentation.md#endpoints)
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/da1d052829d18626e5cd)
 * responses are JSON API 1.0 Compliant
 * GET requests require params submitted via query params
