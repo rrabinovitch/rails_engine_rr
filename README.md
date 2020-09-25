@@ -51,8 +51,9 @@ You can see this API in action through the front-end RailsDriver application, Po
                
 
 ### [Endpoint Documentation](https://github.com/rrabinovitch/rails_engine_rr/blob/master/endpoint_documentation.md#endpoints)
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/da1d052829d18626e5cd)
 * responses are JSON API 1.0 Compliant
 * GET requests require params submitted via query params
 * POST requests require params submitted via the request body
-* if exploring endpoints locally, make sure to first follow the [local set up instructions](https://app.getpostman.com/run-collection/da1d052829d18626e5cd) and run `rails s`
+* if exploring endpoints locally, make sure to first follow the [local set up instructions](https://app.getpostman.com/run-collection/da1d052829d18626e5cd) and run `rails s`  
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/da1d052829d18626e5cd)
