@@ -44,8 +44,8 @@
 
 
 ### RELATIONSHIPS
-* Merchant items: `GET /merchants/<merchant_id>/items` - returns all items associated with the merchant with the corresponding id
-* Item merchant: `GET /items/<item_id>/merchant` - returns the merchant associated with the item with the corresponding id
+* merchant items: `GET /merchants/<merchant_id>/items` - returns all items associated with the merchant with the corresponding id
+* item merchant: `GET /items/<item_id>/merchant` - returns the merchant associated with the item with the corresponding id
 
 
 ### FINDERS
@@ -63,6 +63,4 @@
    
    
 ### BUSINESS INTELLIGENCE
-* `GET merchants/most_revenue?quantity=<number>` - returns a variable number of merchants ranked by total revenue
-
-
+* merchants by most revenue: `GET merchants/most_revenue?quantity=<number>` - returns a variable number of merchants ranked by total revenue
